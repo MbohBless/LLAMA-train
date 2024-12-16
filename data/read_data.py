@@ -33,7 +33,7 @@ def read_web_based_data(url: str) -> list[Document]:
     return documents
 
 
-def read_complex_pdf_to_langchain_docs(pdf_path: str) -> list[Document]:
+def read_complex_pdf_to_langchain_docs(pdf_path: str,skip:int=5) -> list[Document]:
     """
     Reads a PDF file and returns Langchain documents.
 
@@ -45,7 +45,8 @@ def read_complex_pdf_to_langchain_docs(pdf_path: str) -> list[Document]:
     """
     extracted_data = []
     with pdfplumber.open(pdf_path) as pdf:
-        for page in pdf.pages:
+        
+        for page in pdf.pages[5:]:
             extracted_data.append({
                 "text": page.extract_text()
             })
